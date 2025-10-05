@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday 🎂</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background: linear-gradient(135deg, pink, #ffc0cb, #ffb6c1);
+            text-align: center;
+            color: #fff;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .candle {
+            font-size: clamp(4rem, 15vw, 12rem);
+            animation: flicker 0.2s infinite;
+        }
+
+        @keyframes flicker {
+
+            0%,
+            100% {
+                text-shadow: 0 0 20px yellow;
+                color: orange;
+            }
+
+            50% {
+                text-shadow: 0 0 30px red;
+                color: gold;
+            }
+        }
+
+        #countdown {
+            font-size: clamp(1.2rem, 5vw, 1.5rem);
+            margin: 20px 0;
+            padding: 0 10px;
+        }
+
+        .dark {
+            background: black;
+            color: black;
+        }
+
+        #stage2 h1 {
+            font-size: clamp(1.5rem, 6vw, 2.5rem);
+            margin: 20px 10px;
+            padding: 0 10px;
+        }
+
+        .content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            width: 100%;
+            max-height: 60vh;
+            overflow-y: auto;
+            padding: 0 15px;
+        }
+
+        .content img {
+            width: 100%;
+            max-width: min(100px, 45vw);
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .content video {
+            width: 100%;
+            max-width: min(300px, 90vw);
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+
+        .imageContainer {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }   
+
+        .surprise-btn {
+            background: #ff69b4;
+            color: white;
+            padding: clamp(10px, 3vw, 12px) clamp(18px, 6vw, 24px);
+            font-size: clamp(0.9rem, 4vw, 1.1rem);
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            margin: 15px 10px;
+            transition: 0.3s;
+            touch-action: manipulation;
+        }
+
+        .surprise-btn:hover,
+        .surprise-btn:active {
+            background: #ff1493;
+            transform: scale(0.98);
+        }
+
+        /* Carousel wrapper */
+        #carousel {
+            margin: 20px auto 0;
+            overflow: hidden;
+            width: 100%;
+            max-width: 420px;
+            position: relative;
+            padding: 0 15px;
+        }
+
+        .carousel-container {
+            display: flex;
+            transition: transform 0.4s ease-in-out;
+            touch-action: pan-y pinch-zoom;
+        }
+
+        .slide {
+            min-width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+        }
+
+        .slide img,
+        .slide video {
+            width: 100%;
+            max-width: 350px;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Arrows */
+        .arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: clamp(1rem, 4vw, 1.4rem);
+            background: rgba(255, 105, 180, 0.7);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            padding: clamp(5px, 2vw, 6px) clamp(8px, 3vw, 10px);
+            z-index: 10;
+            touch-action: manipulation;
+            user-select: none;
+        }
+
+        .arrow.left {
+            left: 5px;
+        }
+
+        .arrow.right {
+            right: 5px;
+        }
+
+        .arrow:hover,
+        .arrow:active {
+            background: rgba(255, 20, 147, 0.9);
+        }
+
+        /* Prevent text selection during swipe */
+        .carousel-container {
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        /* Landscape mobile adjustments */
+        @media (max-height: 500px) and (orientation: landscape) {
+            .candle {
+                margin-top: 20px;
+                font-size: 3rem;
+            }
+
+            #countdown {
+                margin: 10px 0;
+            }
+
+            #stage2 h1 {
+                margin: 10px;
+            }
+
+            .content {
+                gap: 10px;
+                margin: 10px 0;
+            }
+
+            .surprise-btn {
+                margin: 10px;
+            }
+        }
+
+        /* Small mobile devices */
+        @media (max-width: 360px) {
+            .candle {
+                font-size: 2.8rem;
+            }
+
+            .content {
+                gap: 10px;
+            }
+
+            .arrow {
+                padding: 4px 7px;
+            }
+        }
+
+        /* Larger tablets and desktop */
+        @media (min-width: 768px) {
+
+            .content img,
+            .content video {
+                max-width: 450px;
+            }
+
+            #carousel {
+                max-width: 500px;
+            }
+
+            .slide img {
+                max-width: 400px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Candle Stage -->
+    <div id="stage1">
+        <div class="candle">🕯️</div>
+        <p id="countdown">Blow out in: 5</p>
+    </div>
+
+    <!-- Birthday Stage -->
+    <div id="stage2" class="hidden">
+        <h1>🎉 Happy Birthday! 🎉</h1>
+        <div class="content">
+
+            <div class="imageContainer">
+                <img src="sim1.jpg" alt="image1">
+                <img src="sim2.jpg" alt="image2">
+            </div>
+            
+            <video controls autoplay loop muted playsinline>
+                <source src="birthday.mp4" type="video/mp4">
+            </video>
+
+        </div>
+        <button class="surprise-btn" onclick="showCarousel()">🎶 Surprise 🎶</button>
+        <audio id="birthdayAudio" src="your-audio.mp3"></audio>
+    </div>
+
+    <!-- Carousel Section -->
+    <div id="carousel" class="hidden">
+        <div class="carousel-container" id="carouselContainer">
+            <div class="slide"><img src="poem.jpg" alt="Poem"></div>
+            <div class="slide"><img src="https://shorturl.ad/nqisx" alt="Meme 2"></div>
+            <div class="slide"><img src="bd1.jpg" alt="Birthday 1"></div>
+            <div class="slide"><img src="bd1.jpg" alt="Birthday 2"></div>
+            <div class="slide"><img src="bd2.jpg" alt="Birthday 3"></div>
+            <div class="slide"><img src="bd1.jpg" alt="Birthday 4"></div>
+            <div class="slide"><img src="bd3.jpg" alt="Birthday 5"></div>
+            <div class="slide">
+                <a href="prank.html" style="display: block; width: 100%; cursor: pointer;">
+                    <img src="clickme.jpg" alt="Click Me" style="cursor: pointer;">
+                </a>
+            </div>
+        </div>
+        <button class="arrow left" onclick="prevSlide()">⬅</button>
+        <button class="arrow right" onclick="nextSlide()">➡</button>
+    </div>
+
+    <script>
+        // Countdown
+        let count = 5;
+        const countdown = document.getElementById("countdown");
+
+        let timer = setInterval(() => {
+            count--;
+            countdown.textContent = "Blow out in: " + count;
+
+            if (count === 0) {
+                clearInterval(timer);
+
+                // Dark screen for 2 sec
+                document.body.classList.add("dark");
+                document.getElementById("stage1").classList.add("hidden");
+
+                setTimeout(() => {
+                    document.body.classList.remove("dark");
+                    document.getElementById("stage2").classList.remove("hidden");
+                }, 2000);
+            }
+        }, 1000);
+
+        // Show carousel on surprise
+        function showCarousel() {
+            const audio = document.getElementById("birthdayAudio");
+            audio.play().catch(err => console.log('Audio play failed:', err));
+
+            document.getElementById("stage2").classList.add("hidden");
+            document.getElementById("carousel").classList.remove("hidden");
+            updateCarousel();
+        }
+
+        // Carousel logic
+        const carousel = document.getElementById("carouselContainer");
+        let index = 0;
+        const slides = document.querySelectorAll(".slide");
+
+        function nextSlide() {
+            index = (index + 1) % slides.length;
+            updateCarousel();
+        }
+        function prevSlide() {
+            index = (index - 1 + slides.length) % slides.length;
+            updateCarousel();
+        }
+
+        function updateCarousel() {
+            carousel.style.transform = `translateX(${-index * 100}%)`;
+        }
+
+        // Enhanced swipe handling with threshold
+        let startX = 0;
+        let isDragging = false;
+
+        carousel.addEventListener("touchstart", e => {
+            startX = e.touches[0].clientX;
+            isDragging = true;
+        }, { passive: true });
+
+        carousel.addEventListener("touchmove", e => {
+            if (!isDragging) return;
+        }, { passive: true });
+
+        carousel.addEventListener("touchend", e => {
+            if (!isDragging) return;
+            isDragging = false;
+
+            let endX = e.changedTouches[0].clientX;
+            let diff = startX - endX;
+
+            // Swipe threshold of 50px
+            if (Math.abs(diff) > 50) {
+                if (diff > 0) {
+                    nextSlide();
+                } else {
+                    prevSlide();
+                }
+            }
+        }, { passive: true });
+
+        // Prevent default touch behavior on arrows
+        document.querySelectorAll('.arrow').forEach(arrow => {
+            arrow.addEventListener('touchstart', (e) => {
+                e.stopPropagation();
+            });
+        });
+    </script>
+</body>
+
+</html>

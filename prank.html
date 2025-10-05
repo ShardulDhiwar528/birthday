@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Surprise! 🎉</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background: rgba(255, 105, 180, 0.7);;
+            text-align: center;
+            color: #fff;
+            overflow-x: hidden;
+            height: 100vh;
+            position: fixed;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            max-width: 600px;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: clamp(1.5rem, 6vw, 3rem);
+            margin: 0 0 30px 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .video-wrapper {
+            width: 100%;
+            max-width: 500px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        video {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .back-btn {
+            background: #ff69b4;
+            color: white;
+            padding: clamp(10px, 3vw, 12px) clamp(20px, 6vw, 30px);
+            font-size: clamp(0.9rem, 4vw, 1.1rem);
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            margin-top: 30px;
+            transition: 0.3s;
+            touch-action: manipulation;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .back-btn:hover,
+        .back-btn:active {
+            background: #ff1493;
+            transform: scale(0.98);
+        }
+
+        /* Emoji decorations */
+        .emoji-decoration {
+            position: absolute;
+            font-size: clamp(2rem, 8vw, 4rem);
+            animation: float 3s ease-in-out infinite;
+            opacity: 0.7;
+        }
+
+        .emoji-1 {
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .emoji-2 {
+            top: 20%;
+            right: 10%;
+            animation-delay: 1s;
+        }
+
+        .emoji-3 {
+            bottom: 15%;
+            left: 15%;
+            animation-delay: 2s;
+        }
+
+        .emoji-4 {
+            bottom: 10%;
+            right: 15%;
+            animation-delay: 1.5s;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        /* Landscape adjustments */
+        @media (max-height: 600px) and (orientation: landscape) {
+            .container {
+                padding: 10px;
+            }
+
+            h1 {
+                margin: 0 0 15px 0;
+                font-size: clamp(1.2rem, 4vw, 2rem);
+            }
+
+            .video-wrapper {
+                max-width: 400px;
+            }
+
+            .back-btn {
+                margin-top: 15px;
+            }
+
+            .emoji-decoration {
+                font-size: clamp(1.5rem, 5vw, 2.5rem);
+            }
+        }
+
+        /* Small mobile devices */
+        @media (max-width: 360px) {
+            h1 {
+                font-size: 1.3rem;
+            }
+
+            .video-wrapper {
+                max-width: 320px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Floating emojis -->
+    <div class="emoji-decoration emoji-1">😂</div>
+    <div class="emoji-decoration emoji-2">🎊</div>
+    <div class="emoji-decoration emoji-3">🎈</div>
+    <div class="emoji-decoration emoji-4">🎉</div>
+
+    <div class="container">
+        <h1>😄 Got You! 😄</h1>
+        <h3>Pichle Saal Ka Badla Liya Gaya Hain</h3>
+
+        <div class="video-wrapper">
+            <video controls autoplay loop playsinline>
+                <source src="prank.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+
+        <a href="index.html" class="back-btn">🔙 Go Back</a>
+    </div>
+
+    <script>
+        // Auto-play video with sound on user interaction
+        const video = document.querySelector('video');
+
+        document.body.addEventListener('click', function () {
+            if (video.muted) {
+                video.muted = false;
+                video.play();
+            }
+        }, { once: true });
+    </script>
+</body>
+
+</html>
